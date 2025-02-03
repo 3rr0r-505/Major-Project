@@ -1,0 +1,122 @@
+[
+    {
+        "name": "kippo",
+        "Date&Time": "2025-01-30 10:15:45",
+        "used creds": 
+        {
+            "ipv4": "192.168.1.10",
+            "port": "22",
+            "username": "root",
+            "password": "toor",
+            "http-link": "null"
+        },
+        "scans": 
+        {
+            "nmap_scan": "OpenSSH 7.9p1 Debian 10+deb10u2",
+            "openVAS_scan": "Medium risk vulnerability found",
+            "nikto_scan": "Apache 2.4.29 found",
+            "msf_scan": ["CVE-2021-3156", "CVE-2019-0708", "CVE-2020-0796", "CVE-2018-10933"]
+        },
+        "attacks":
+        {
+            "honeypot_detection": "true",
+            "code_injection": "false",
+            "data_leakage": "true",
+            "evading_logs": "false",
+            "reverse_exploitation": "false",
+            "service_crash": "true",
+            "dos_attack": "false",
+            "privilege_escalation": "true"
+        }
+    },
+    {
+        "name": "cowrie",
+        "Date&Time": "2025-01-30 11:45:23",
+        "used creds": 
+        {
+            "ipv4": "10.0.0.5",
+            "port": "2222",
+            "username": "admin",
+            "password": "null",
+            "http-link": "http://malicious.com/exploit"
+        },
+        "scans": 
+        {
+            "nmap_scan": "SSH-2.0-OpenSSH_8.0",
+            "openVAS_scan": "Low risk vulnerability detected",
+            "nikto_scan": "Apache 2.2.34 with outdated modules",
+            "msf_scan": ["CVE-2017-0144", "CVE-2020-1472", "CVE-2022-22965", "CVE-2019-11510"]
+        },
+        "attacks":
+        {
+            "honeypot_detection": "true",
+            "code_injection": "true",
+            "data_leakage": "false",
+            "evading_logs": "true",
+            "reverse_exploitation": "false",
+            "service_crash": "false",
+            "dos_attack": "true",
+            "privilege_escalation": "false"
+        }
+    },
+    {
+        "name": "conpot",
+        "Date&Time": "2025-01-30 14:30:55",
+        "used creds": 
+        {
+            "ipv4": "172.16.0.8",
+            "port": "502",
+            "username": "null",
+            "password": "null",
+            "http-link": "http://example.com/malware"
+        },
+        "scans": 
+        {
+            "nmap_scan": "Siemens S7 PLC detected",
+            "openVAS_scan": "High-risk SCADA vulnerability",
+            "nikto_scan": "nginx 1.16.1 running",
+            "msf_scan": ["CVE-2015-5374", "CVE-2016-6323", "CVE-2021-29200", "CVE-2018-14847"]
+        },
+        "attacks":
+        {
+            "honeypot_detection": "false",
+            "code_injection": "true",
+            "data_leakage": "true",
+            "evading_logs": "true",
+            "reverse_exploitation": "true",
+            "service_crash": "false",
+            "dos_attack": "true",
+            "privilege_escalation": "false"
+        }
+    },
+    {
+        "name": "Dionaea",
+        "Date&Time": "2025-01-30 16:05:10",
+        "used creds": 
+        {
+            "ipv4": "192.168.56.101",
+            "port": "445",
+            "username": "null",
+            "password": "null",
+            "http-link": "null"
+        },
+        "scans": 
+        {
+            "nmap_scan": "Microsoft Windows SMBv1 Server",
+            "openVAS_scan": "Critical SMB vulnerability detected",
+            "nikto_scan": "IIS 7.5 with default settings",
+            "msf_scan": ["CVE-2017-0143", "CVE-2018-8120", "CVE-2020-0601", "CVE-2019-0708"]
+        },
+        "attacks":
+        {
+            "honeypot_detection": "true",
+            "code_injection": "false",
+            "data_leakage": "true",
+            "evading_logs": "false",
+            "reverse_exploitation": "false",
+            "service_crash": "true",
+            "dos_attack": "false",
+            "privilege_escalation": "true"
+        }
+    }
+]

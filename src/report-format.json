@@ -1,0 +1,30 @@
+{
+	"name": "<test_name>",
+	"Date&Time": "<timestamp>",
+	"used creds": 
+	{
+		"ipv4": "ip",
+		"port": "port",
+		"username": "uname/null",
+		"password": "passwd/null",
+		"http-link": "link/null"
+	},
+	"scans": 
+	{
+		"nmap_scan": "<nmap-report>",
+		"openVAS_scan": "<openVAS-report>",
+		"nikto_scan": "<nikto-report>",
+		"msf_scan": ["cve-1","cve-2","cve-3","cve-4"]
+	},
+	"attacks":
+	{
+		"honeypot_detection": "true/false",  
+		"code_injection": "true/false",       
+		"data_leakage": "true/false",
+		"evading_logs": "true/false",         
+		"reverse_exploitation": "true/false", 
+		"service_crash": "true/false",       
+		"dos_attack": "true/false",           
+		"privilege_escalation": "true/false"
+	}
+}
