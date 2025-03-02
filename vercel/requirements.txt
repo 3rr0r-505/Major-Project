@@ -2,4 +2,3 @@ flask
 pymongo
 python-dotenv
 gunicorn
-gridfs
