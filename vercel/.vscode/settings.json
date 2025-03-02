@@ -1,0 +1,9 @@
+{
+    "cSpell.words": [
+        "bson",
+        "dotenv",
+        "gridfs",
+        "gunicorn",
+        "pymongo"
+    ]
+}
