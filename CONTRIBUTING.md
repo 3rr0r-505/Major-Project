@@ -1,6 +1,6 @@
 # Contributing to HoneyPott3r
 
-Thank you for considering contributing to KeySpy! We appreciate your interest in making our project better.
+Thank you for considering contributing to HoneyPott3r! We appreciate your interest in making our project better.
 
 ## Getting Started
 
