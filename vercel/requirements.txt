@@ -1,5 +1,5 @@
-Flask
-pymongo[srv]
+flask
+pymongo
 python-dotenv
 gunicorn
 gridfs
