@@ -1,1 +1,8 @@
-
+paramiko
+requests
+scapy
+pymongo
+yaml
+tabulate
+dotenv
+flask
