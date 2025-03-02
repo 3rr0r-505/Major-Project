@@ -58,28 +58,23 @@ class msfScan:
         Returns:
             dict: Mapping of CVEs to available MSF modules, or a message if none are found.
         """
-        print("\n===============Metasploit Scan Report===============\n")
+        with ThreadPoolExecutor(max_workers=15) as executor:
+            try:
+                future_to_cve = {executor.submit(self.run_msf_search, cve): cve for cve in cve_dict.keys()}
+                
+                for future in as_completed(future_to_cve):
+                    cve, modules = future.result()
+                    if modules:
+                        self.found_msf_modules[cve] = modules
 
-        if len(cve_dict) < 100:
-            with ThreadPoolExecutor(max_workers=15) as executor:
-                try:
-                    future_to_cve = {executor.submit(self.run_msf_search, cve): cve for cve in cve_dict.keys()}
-
-                    for future in as_completed(future_to_cve):
-                        cve, modules = future.result()
-                        if modules:
-                            self.found_msf_modules[cve] = modules
-
-                except KeyboardInterrupt:
-                    print("\n[!] Ctrl+C detected! Shutting down threads...")
-                    executor.shutdown(wait=False, cancel_futures=True)
-                    raise SystemExit("\n[!] Scan aborted by user.")
-        else:
-            print("\n[!] CVE list is too long. Try to search manually.")
-            return "[!] CVE list is too long. Try to search manually."
+            except KeyboardInterrupt:
+                print("\n[!] Ctrl+C detected! Shutting down threads...")
+                executor.shutdown(wait=False, cancel_futures=True)
+                raise SystemExit("\n[!] Scan aborted by user.")
 
         if not self.found_msf_modules:
             print("\n[!] No Metasploit modules found for the given CVEs.")
-            return "[!] No Metasploit modules found for the given CVEs."
-
+            return {"[!] No Metasploit modules found for the given CVEs."}
+        
         return self.found_msf_modules
+

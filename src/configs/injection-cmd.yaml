@@ -1,0 +1,673 @@
+codeInjection:
+  cowrie:
+    - command: "; id"
+      output: "uid=0(root) gid=0(root) groups=0(root)"
+
+    - command: "&& id"
+      output: "-bash: syntax error near unexpected token `&&'"
+
+    - command: "| whoami"
+      output: "-bash: |: command not found"
+
+    - command: "$(uname -a)"
+      output: "-bash: Linux svr04 3.2.0-4-amd64 #1 SMP Debian 3.2.68-1+deb7u1 x86_64 GNU/Linux: command not found"
+
+    - command: "cd /; ls -la"
+      output: |
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:03 .
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:03 ..
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:53 bin
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:02 boot
+        drwxr-xr-x 1 root root  3060 2013-04-05 12:03 dev
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:06 etc
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:02 home
+        lrwxrwxrwx 1 root root    32 2013-04-05 11:53 initrd.img -> /boot/initrd.img-3.2.0-4-686-pae
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:01 lib
+        drwx------ 1 root root 16384 2013-04-05 11:52 lost+found
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 media
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 mnt
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 opt
+        dr-xr-xr-x 1 root root     0 2013-04-05 12:03 proc
+        drwx------ 1 root root  4096 2013-04-05 12:25 root
+        drwxr-xr-x 1 root root   380 2013-04-05 12:06 run
+        drwxr-xr-x 1 root root  4096 2013-04-05 12:03 sbin
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 selinux
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 srv
+        drwxr-xr-x 1 root root     0 2013-04-05 12:03 sys
+        -rwxr-xr-x 1 root root   500 2021-05-30 04:44 test2
+        drwxrwxrwt 1 root root  4096 2013-04-05 12:17 tmp
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 usr
+        drwxr-xr-x 1 root root  4096 2013-04-05 11:52 var
+        lrwxrwxrwx 1 root root    28 2013-04-05 11:53 vmlinuz -> /boot/vmlinuz-3.2.0-4-686-pae
+
+    - command: "`cat /etc/passwd`"
+      output: |
+        -bash: root:x:0:0:root:/root:/bin/bash
+        daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+        bin:x:2:2:bin:/bin:/bin/sh
+        sys:x:3:3:sys:/dev:/bin/sh
+        sync:x:4:65534:sync:/bin:/bin/sync
+        games:x:5:60:games:/usr/games:/bin/sh
+        man:x:6:12:man:/var/cache/man:/bin/sh
+        lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+        mail:x:8:8:mail:/var/mail:/bin/sh
+        news:x:9:9:news:/var/spool/news:/bin/sh
+        uucp:x:10:10:uucp:/var/spool/uucp:/bin/sh
+        proxy:x:13:13:proxy:/bin:/bin/sh
+        www-data:x:33:33:www-data:/var/www:/bin/sh
+        backup:x:34:34:backup:/var/backups:/bin/sh
+        list:x:38:38:Mailing List Manager:/var/list:/bin/sh
+        irc:x:39:39:ircd:/var/run/ircd:/bin/sh
+        gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh
+        nobody:x:65534:65534:nobody:/nonexistent:/bin/sh
+        libuuid:x:100:101::/var/lib/libuuid:/bin/sh
+        sshd:x:101:65534::/var/run/sshd:/usr/sbin/nologin
+        phil:x:1000:1000:Phil California,,,:/home/phil:/bin/bash: command not found
+
+  conpot:
+    - command: "GET /config"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /status"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /device/info"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /register"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /data"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /logs"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /scada/control"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+    - command: "GET /scada/status"
+      output: |
+        <HTML>
+
+            <HEAD>
+                <TITLE>Not found - Siemens, SIMATIC, S7-200</TITLE>
+            </HEAD>
+
+            <BODY>
+                <h2>CP 443-1 EX40</h2>
+                <hr>
+                &nbsp;<br>
+                This resource could not be found.<br>
+            </BODY>
+
+        </HTML>
+
+  wordpot:
+    - command: "GET /wp-content/plugins/vuln-plugin/shell.php?cmd=id"
+      output: |
+        <!DOCTYPE html>
+        <!--[if IE 6]>
+        <html id="ie6" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 7]>
+        <html id="ie7" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 8]>
+        <html id="ie8" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+        <html dir="ltr" lang="en-US">
+        <!--<![endif]-->
+
+
+        <body class="home blog single-author two-column right-sidebar">
+        <div id="page" class="hfeed">
+            
+          <header id="branding" role="banner">
+              <hgroup>
+                <h1 id="site-title"><span><a href="/" title="Random Ramblings" rel="home">Random Ramblings</a></span></h1>
+                <h2 id="site-description">Just another WordPress site</h2>
+              </hgroup>	
+            <form method="get" id="searchform" action="/">
+            <label for="s" class="assistive-text">Search</label>
+            <input type="text" class="field" name="s" id="s" placeholder="Search" />
+            <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+          </form>
+              
+              <nav id="access" role="navigation">
+                <h3 class="assistive-text">Main menu</h3>
+                        <div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+                <div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+                        <div class="menu"><ul><li class="current_page_item"><a href="/" title="Home">Home</a></li><li class="page_item page-item-2"><a href="/?page_id=2">Sample Page</a></li></ul></div>
+              </nav><!-- #access -->
+            </header><!-- #branding -->
+            
+
+          <div id="main">
+
+            <div id="primary">
+              <div id="content" role="main">
+            
+                
+            
+
+            
+            <article id="post-1" class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
+            <header class="entry-header">
+                    <h1 class="entry-title"><a href="/?p=1" title="Permalink to Hello world!" rel="bookmark">Hello world!</a></h1>
+
+                    <div class="entry-meta">
+                        <span class="sep">Posted on </span><a href="/?p=1" title="9:57 am" rel="bookmark"><time class="entry-date" datetime="2012-06-28T09:57:14+00:00" pubdate>June 28, 2012</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="/?author=1" title="View all posts by admin" rel="author">admin</a></span></span>			
+                    </div><!-- .entry-meta -->
+              
+              <div class="comments-link">
+                        <a href="/?p=1#comments" title="Comment on Hello world!">1</a>
+                    </div>
+            </header><!-- .entry-header -->
+
+            <div class="entry-content">
+              <p>Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!</p>
+            </div><!-- .entry-content -->
+            
+            <footer class="entry-meta">
+              <span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a></span><span class="sep"> | </span><span class="comments-link"><a href="/?p=1#comments" title="Comment on Hello world!"><b>1</b> Reply</a></span>
+            </footer><!-- #entry-meta -->
+          </article><!-- #post-1 -->
+                
+              
+              </div><!-- #content -->
+            </div><!-- #primary -->
+
+                
+            <div id="secondary" class="widget-area" role="complementary">
+              <aside id="search-2" class="widget widget_search">	<form method="get" id="searchform" action="/">
+            <label for="s" class="assistive-text">Search</label>
+            <input type="text" class="field" name="s" id="s" placeholder="Search" />
+            <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+          </form>
+        </aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+                <li><a href="/?p=1" title="Hello world!">Hello world!</a></li>
+                </ul>
+            </aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href='http://wordpress.org/' rel='external nofollow' class='url'>Mr WordPress</a> on <a href="/?p=1#comment-1">Hello world!</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+              <li><a href='/?m=201206' title='June 2012'>June 2012</a></li>
+            </ul>
+        </aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+          <li class="cat-item cat-item-1"><a href="/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a>
+        </li>
+            </ul>
+        </aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+                    <li><a href="/wp-login.php">Log in</a></li>
+              <li><a href="/?feed=rss2" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+              <li><a href="/?feed=comments-rss2" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+              <li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+                    </ul>
+                </aside>		
+                </div><!-- #secondary .widget-area -->
+            
+
+
+          </div><!-- #main -->
+
+            
+          <footer id="colophon" role="contentinfo">
+              <div id="site-generator">
+                        <a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress</a>
+              </div>
+            </footer><!-- #colophon -->
+            
+        </div><!-- #page -->
+
+        </body>
+        </html>
+
+    - command: "GET /wp-content/plugins/vuln-plugin/vuln.php?code=%3C%3Fphp%20system($_GET%5B'cmd'%5D);%20%3F%3E&cmd=id"
+      output: |
+        <!DOCTYPE html>
+        <!--[if IE 6]>
+        <html id="ie6" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 7]>
+        <html id="ie7" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 8]>
+        <html id="ie8" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+        <html dir="ltr" lang="en-US">
+        <!--<![endif]-->
+
+
+        <body class="home blog single-author two-column right-sidebar">
+        <div id="page" class="hfeed">
+            
+          <header id="branding" role="banner">
+              <hgroup>
+                <h1 id="site-title"><span><a href="/" title="Random Ramblings" rel="home">Random Ramblings</a></span></h1>
+                <h2 id="site-description">Just another WordPress site</h2>
+              </hgroup>	
+            <form method="get" id="searchform" action="/">
+            <label for="s" class="assistive-text">Search</label>
+            <input type="text" class="field" name="s" id="s" placeholder="Search" />
+            <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+          </form>
+              
+              <nav id="access" role="navigation">
+                <h3 class="assistive-text">Main menu</h3>
+                        <div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+                <div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+                        <div class="menu"><ul><li class="current_page_item"><a href="/" title="Home">Home</a></li><li class="page_item page-item-2"><a href="/?page_id=2">Sample Page</a></li></ul></div>
+              </nav><!-- #access -->
+            </header><!-- #branding -->
+            
+
+          <div id="main">
+
+            <div id="primary">
+              <div id="content" role="main">
+            
+                
+            
+
+            
+            <article id="post-1" class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
+            <header class="entry-header">
+                    <h1 class="entry-title"><a href="/?p=1" title="Permalink to Hello world!" rel="bookmark">Hello world!</a></h1>
+
+                    <div class="entry-meta">
+                        <span class="sep">Posted on </span><a href="/?p=1" title="9:57 am" rel="bookmark"><time class="entry-date" datetime="2012-06-28T09:57:14+00:00" pubdate>June 28, 2012</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="/?author=1" title="View all posts by admin" rel="author">admin</a></span></span>			
+                    </div><!-- .entry-meta -->
+              
+              <div class="comments-link">
+                        <a href="/?p=1#comments" title="Comment on Hello world!">1</a>
+                    </div>
+            </header><!-- .entry-header -->
+
+            <div class="entry-content">
+              <p>Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!</p>
+            </div><!-- .entry-content -->
+            
+            <footer class="entry-meta">
+              <span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a></span><span class="sep"> | </span><span class="comments-link"><a href="/?p=1#comments" title="Comment on Hello world!"><b>1</b> Reply</a></span>
+            </footer><!-- #entry-meta -->
+          </article><!-- #post-1 -->
+                
+              
+              </div><!-- #content -->
+            </div><!-- #primary -->
+
+                
+            <div id="secondary" class="widget-area" role="complementary">
+              <aside id="search-2" class="widget widget_search">	<form method="get" id="searchform" action="/">
+            <label for="s" class="assistive-text">Search</label>
+            <input type="text" class="field" name="s" id="s" placeholder="Search" />
+            <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+          </form>
+        </aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+                <li><a href="/?p=1" title="Hello world!">Hello world!</a></li>
+                </ul>
+            </aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href='http://wordpress.org/' rel='external nofollow' class='url'>Mr WordPress</a> on <a href="/?p=1#comment-1">Hello world!</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+              <li><a href='/?m=201206' title='June 2012'>June 2012</a></li>
+            </ul>
+        </aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+          <li class="cat-item cat-item-1"><a href="/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a>
+        </li>
+            </ul>
+        </aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+                    <li><a href="/wp-login.php">Log in</a></li>
+              <li><a href="/?feed=rss2" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+              <li><a href="/?feed=comments-rss2" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+              <li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+                    </ul>
+                </aside>		
+                </div><!-- #secondary .widget-area -->
+            
+
+
+          </div><!-- #main -->
+
+            
+          <footer id="colophon" role="contentinfo">
+              <div id="site-generator">
+                        <a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress</a>
+              </div>
+            </footer><!-- #colophon -->
+            
+        </div><!-- #page -->
+
+        </body>
+        </html>
+
+    - command: "GET /wp-content/themes/twentytwentyone/header.php?cmd=id"
+      output: |
+        <!DOCTYPE html>
+        <!--[if IE 6]>
+        <html id="ie6" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 7]>
+        <html id="ie7" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 8]>
+        <html id="ie8" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+        <html dir="ltr" lang="en-US">
+        <!--<![endif]-->
+
+
+        <body class="home blog single-author two-column right-sidebar">
+        <div id="page" class="hfeed">
+            
+          <header id="branding" role="banner">
+              <hgroup>
+                <h1 id="site-title"><span><a href="/" title="Random Ramblings" rel="home">Random Ramblings</a></span></h1>
+                <h2 id="site-description">Just another WordPress site</h2>
+              </hgroup>	
+            <form method="get" id="searchform" action="/">
+            <label for="s" class="assistive-text">Search</label>
+            <input type="text" class="field" name="s" id="s" placeholder="Search" />
+            <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+          </form>
+              
+              <nav id="access" role="navigation">
+                <h3 class="assistive-text">Main menu</h3>
+                        <div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+                <div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+                        <div class="menu"><ul><li class="current_page_item"><a href="/" title="Home">Home</a></li><li class="page_item page-item-2"><a href="/?page_id=2">Sample Page</a></li></ul></div>
+              </nav><!-- #access -->
+            </header><!-- #branding -->
+            
+
+          <div id="main">
+
+            <div id="primary">
+              <div id="content" role="main">
+            
+                
+            
+
+            
+            <article id="post-1" class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
+            <header class="entry-header">
+                    <h1 class="entry-title"><a href="/?p=1" title="Permalink to Hello world!" rel="bookmark">Hello world!</a></h1>
+
+                    <div class="entry-meta">
+                        <span class="sep">Posted on </span><a href="/?p=1" title="9:57 am" rel="bookmark"><time class="entry-date" datetime="2012-06-28T09:57:14+00:00" pubdate>June 28, 2012</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="/?author=1" title="View all posts by admin" rel="author">admin</a></span></span>			
+                    </div><!-- .entry-meta -->
+              
+              <div class="comments-link">
+                        <a href="/?p=1#comments" title="Comment on Hello world!">1</a>
+                    </div>
+            </header><!-- .entry-header -->
+
+            <div class="entry-content">
+              <p>Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!</p>
+            </div><!-- .entry-content -->
+            
+            <footer class="entry-meta">
+              <span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a></span><span class="sep"> | </span><span class="comments-link"><a href="/?p=1#comments" title="Comment on Hello world!"><b>1</b> Reply</a></span>
+            </footer><!-- #entry-meta -->
+          </article><!-- #post-1 -->
+                
+              
+              </div><!-- #content -->
+            </div><!-- #primary -->
+
+                
+            <div id="secondary" class="widget-area" role="complementary">
+              <aside id="search-2" class="widget widget_search">	<form method="get" id="searchform" action="/">
+            <label for="s" class="assistive-text">Search</label>
+            <input type="text" class="field" name="s" id="s" placeholder="Search" />
+            <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+          </form>
+        </aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">Recent Posts</h3>		<ul>
+                <li><a href="/?p=1" title="Hello world!">Hello world!</a></li>
+                </ul>
+            </aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href='http://wordpress.org/' rel='external nofollow' class='url'>Mr WordPress</a> on <a href="/?p=1#comment-1">Hello world!</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title">Archives</h3>		<ul>
+              <li><a href='/?m=201206' title='June 2012'>June 2012</a></li>
+            </ul>
+        </aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3>		<ul>
+          <li class="cat-item cat-item-1"><a href="/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a>
+        </li>
+            </ul>
+        </aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">Meta</h3>			<ul>
+                    <li><a href="/wp-login.php">Log in</a></li>
+              <li><a href="/?feed=rss2" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+              <li><a href="/?feed=comments-rss2" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+              <li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+                    </ul>
+                </aside>		
+                </div><!-- #secondary .widget-area -->
+            
+
+
+          </div><!-- #main -->
+
+            
+          <footer id="colophon" role="contentinfo">
+              <div id="site-generator">
+                        <a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress</a>
+              </div>
+            </footer><!-- #colophon -->
+            
+        </div><!-- #page -->
+
+        </body>
+        </html>
+
+    - command: "GET /?page=../../../../etc/passwd"
+      output: |
+        <!DOCTYPE html>
+        <!--[if IE 6]>
+        <html id="ie6" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 7]>
+        <html id="ie7" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if IE 8]>
+        <html id="ie8" dir="ltr" lang="en-US">
+        <![endif]-->
+        <!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+        <html dir="ltr" lang="en-US">
+        <!--<![endif]-->
+
+
+
+        <body class="home blog single-author two-column right-sidebar">
+        <div id="page" class="hfeed">
+            
+                <header id="branding" role="banner">
+                                <hgroup>
+                                        <h1 id="site-title"><span><a href="/" title="Random Ramblings" rel="home">Random Ramblings</a></span></h1>
+                                        <h2 id="site-description">Just another WordPress site</h2>
+                                </hgroup>
+            <form method="get" id="searchform" action="/">
+                        <label for="s" class="assistive-text">Search</label>
+                        <input type="text" class="field" name="s" id="s" placeholder="Search" />
+                        <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+                </form>
+
+                                <nav id="access" role="navigation">
+                                        <h3 class="assistive-text">Main menu</h3>
+                                                                        <div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+                                        <div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+                                                                        <div class="menu"><ul><li class="current_page_item"><a href="/" title="Home">Home</a></li><li class="page_item page-item-2"><a href="/?page_id=2">Sample Page</a></li></ul></div>
+                                </nav><!-- #access -->
+            </header><!-- #branding -->
+            
+
+                <div id="main">
+
+                        <div id="primary">
+                                <div id="content" role="main">
+            
+            
+            
+
+            
+            <article id="post-1" class="post-1 post type-post status-publish format-standard hentry category-uncategorized">
+                        <header class="entry-header">
+                    <h1 class="entry-title"><a href="/?p=1" title="Permalink to Hello world!" rel="bookmark">Hello world!</a></h1>
+
+                    <div class="entry-meta">
+                        <span class="sep">Posted on </span><a href="/?p=1" title="9:57 am" rel="bookmark"><time class="entry-date" datetime="2012-06-28T09:57:14+00:00" pubdate>June 28, 2012</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="/?author=1" title="View all posts by admin" rel="author">admin</a></span></span>
+                    </div><!-- .entry-meta -->
+
+                                <div class="comments-link">
+                        <a href="/?p=1#comments" title="Comment on Hello world!">1</a>
+                    </div>
+                        </header><!-- .entry-header -->
+
+                        <div class="entry-content">
+                                <p>Welcome to WordPress. This is your first post. Edit or delete it, then start blogging!</p>
+                        </div><!-- .entry-content -->
+
+                        <footer class="entry-meta">
+                                <span class="cat-links"><span class="entry-utility-prep entry-utility-prep-cat-links">Posted in</span> <a href="/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a></span><span class="sep"> | </span><span class="comments-link"><a href="/?p=1#comments" title="Comment on Hello world!"><b>1</b> Reply</a></span>
+                        </footer><!-- #entry-meta -->
+                </article><!-- #post-1 -->
+                
+
+                                </div><!-- #content -->
+                        </div><!-- #primary -->
+
+                
+                        <div id="secondary" class="widget-area" role="complementary">
+                                <aside id="search-2" class="widget widget_search">      <form method="get" id="searchform" action="/">
+                        <label for="s" class="assistive-text">Search</label>
+                        <input type="text" class="field" name="s" id="s" placeholder="Search" />
+                        <input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+                </form>
+        </aside>                <aside id="recent-posts-2" class="widget widget_recent_entries">                <h3 class="widget-title">Recent Posts</h3>   <ul>
+                                        <li><a href="/?p=1" title="Hello world!">Hello world!</a></li>
+                                        </ul>
+                        </aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href='http://wordpress.org/' rel='external nofollow' class='url'>Mr WordPress</a> on <a href="/?p=1#comment-1">Hello world!</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h3 class="widget-title">Archives</h3>         <ul>
+                                <li><a href='/?m=201206' title='June 2012'>June 2012</a></li>
+                        </ul>
+        </aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title">Categories</h3>              <ul>
+                <li class="cat-item cat-item-1"><a href="/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a>
+        </li>
+                        </ul>
+        </aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">Meta</h3>                        <ul>
+                                                        <li><a href="/wp-login.php">Log in</a></li>
+                                <li><a href="/?feed=rss2" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+                                <li><a href="/?feed=comments-rss2" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+                                <li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+                                                        </ul>
+                </aside>
+                </div><!-- #secondary .widget-area -->
+            
+
+
+                </div><!-- #main -->
+
+            
+                <footer id="colophon" role="contentinfo">
+                                <div id="site-generator">
+                                                                        <a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress</a>
+                                </div>
+            </footer><!-- #colophon -->
+            
+        </div><!-- #page -->
+
+        </body>
+        </html>
+

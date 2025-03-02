@@ -1,0 +1,12 @@
+honeypots:
+  - name: Cowrie
+    github: "https://github.com/cowrie/cowrie.git"
+    requirements: "https://raw.githubusercontent.com/cowrie/cowrie/refs/heads/main/requirements-dev.txt"
+
+  - name: Conpot
+    github: "https://github.com/mushorg/conpot.git"
+    requirements: "https://raw.githubusercontent.com/mushorg/conpot/refs/heads/master/requirements.txt"
+
+  - name: Wordpot
+    github: "https://github.com/gbrindisi/wordpot.git"
+    requirements: "https://raw.githubusercontent.com/gbrindisi/wordpot/refs/heads/master/requirements.txt"

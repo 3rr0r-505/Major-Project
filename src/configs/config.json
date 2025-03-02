@@ -1,0 +1,11 @@
+{
+    "test_name": "cowrie-cmplt3",
+    "honeypot_type": "ssh",
+    "honeypot_creds": {
+        "ip": "54.160.218.15",
+        "ports": "2222",
+        "username": "root",
+        "password": "",
+        "http-link": "http://54.160.218.15:8080/"
+    }
+}
