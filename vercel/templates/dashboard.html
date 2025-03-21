@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HoneyPott3r Dashboard</title>
+    <title>HoneyPott3r Dashboard Demo</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <style>
       .header {
         background: linear-gradient(90deg, #2c3e50, #3498db);
@@ -45,6 +47,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        position: relative;
       }
 
       .scanner-card:hover {
@@ -131,6 +134,7 @@
         padding-top: 80px;
         background: linear-gradient(135deg, #1e3c72, #2a5298);
         color: white;
+        font-family: Arial, sans-serif;
       }
       .card {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -168,6 +172,70 @@
       .back-btn:hover {
         background: linear-gradient(90deg, #16345d, #1f4b88);
       }
+      .info-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .info-btn:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .modal-dialog {
+        /* Added this class */
+        max-width: 800px; /* Increased width */
+        width: 80%; /* Added this line so the modal will scale */
+        margin: 1.75rem auto; /* Ensures it stays centered */
+      }
+
+      .modal-content {
+        background: #2a2a3a;
+        color: white;
+        border-radius: 10px;
+        padding: 20px;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .modal-header {
+        border-bottom: none;
+      }
+
+      .modal-body {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 22px;
+        color: white;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .close-btn:hover {
+        color: #ff5252;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
   </head>
   <body class="container">
@@ -175,34 +243,45 @@
       <span>HoneyPott3r Dashboard</span>
     </div>
 
-    <div class="row scanner-section">
-      <div class="col-md-3">
-        <div class="scanner-card" onclick="fetchReport('nmap_scan')">
-          <h5>🛡️ Nmap Report</h5>
-          <p>{{ reports.get("nmap_scan", "No data available")[:100] }}...</p>
+    <div class="container">
+      <div class="row scanner-section">
+        <div class="col-md-3">
+          <div class="scanner-card" onclick="fetchReport('nmap_scan')">
+            <button class="info-btn" onclick="openModal(event, 'nmap_scan')">
+              ℹ️
+            </button>
+            <h5>🛡️ Nmap Report</h5>
+            <p>{{ reports.get("nmap_scan", "No data available")[:100] }}...</p>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="scanner-card" onclick="fetchReport('nikto_scan')">
-          <h5>🔍 Nikto Report</h5>
-          <p>
-            {{ (reports.get("nikto_scan")[:100] + '...') if
-            reports.get("nikto_scan") else "No data available" }}
-          </p>
+        <div class="col-md-3">
+          <div class="scanner-card" onclick="fetchReport('nikto_scan')">
+            <button class="info-btn" onclick="openModal(event, 'nikto_scan')">
+              ℹ️
+            </button>
+            <h5>🔍 Nikto Report</h5>
+            <p>{{ reports.get("nikto_scan", "No data available")[:100] }}...</p>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="scanner-card" onclick="fetchReport('WPscan_scan')">
-          <h5>🔓 WPScan Report</h5>
-          <p>
-            {{ (reports.get("WPscan_scan") or "No data available")[:100] }}...
-          </p>
+        <div class="col-md-3">
+          <div class="scanner-card" onclick="fetchReport('WPscan_scan')">
+            <button class="info-btn" onclick="openModal(event, 'WPscan_scan')">
+              ℹ️
+            </button>
+            <h5>🔓 WPScan Report</h5>
+            <p>
+              {{ reports.get("WPscan_scan", "No data available")[:100] }}...
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="col-md-3">
-        <div class="scanner-card" onclick="fetchReport('msf_scan')">
-          <h5>⚡ Metasploit Report</h5>
-          <p>{{ reports.get("msf_scan", "No data available")[:100] }}...</p>
+        <div class="col-md-3">
+          <div class="scanner-card" onclick="fetchReport('msf_scan')">
+            <button class="info-btn" onclick="openModal(event, 'msf_scan')">
+              ℹ️
+            </button>
+            <h5>⚡ Metasploit Report</h5>
+            <p>{{ reports.get("msf_scan", "No data available")[:100] }}...</p>
+          </div>
         </div>
       </div>
     </div>
@@ -225,6 +304,132 @@
     <div class="back-btn-container mb-4">
       <a href="/" class="back-btn">⬅ Back to Home</a>
     </div>
+
+    <div id="infoModal" class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle">Report Details</h5>
+            <button type="button" class="close-btn" data-bs-dismiss="modal">
+              ✖
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modalContent">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openModal(event, reportType) {
+        event.stopPropagation();
+
+        let nmapInfoHtml = `
+    <div id="nmap-info">
+        <h2>Nmap (Network Mapper)</h2>
+        <p>Imagine you're exploring a neighborhood. Nmap is like a map and a detective's tool for computer networks. It helps you discover what computers are present and what services they offer.</p>
+        <h3>What it Does:</h3>
+        <ul>
+            <li><strong>Finds Computers:</strong> Like checking which houses have lights on, it finds active devices.</li>
+            <li><strong>Checks Open Doors (Ports):</strong> Sees which "doors" (ports) are open, revealing available services.</li>
+            <li><strong>Identifies Software:</strong> Figures out what programs are running, like knowing which brand of oven is in a kitchen.</li>
+            <li><strong>Detects Operating Systems:</strong> Tells you the "type" of computer, like knowing if a house is brick or wood.</li>
+            <li><strong>Uses Scripts:</strong> Runs automated checks, like a detective using special tools for clues.</li>
+        </ul>
+        <h3>Why it's Useful:</h3>
+        <ul>
+            <li><strong>Security Checks:</strong> Finds weak spots, like unlocked windows in a house.</li>
+            <li><strong>Network Inventory:</strong> Keeps track of all devices, like a list of all houses in the neighborhood.</li>
+            <li><strong>Network Monitoring:</strong> Watches for changes, like noticing if a new house is built.</li>
+            <li><strong>Troubleshooting:</strong> Helps fix problems, like finding a broken water pipe in a house.</li>
+        </ul>
+        <p>Nmap is a key tool for understanding and securing computer networks, used by both network experts and security professionals.</p>
+    </div>
+`;
+
+        let niktoInfoHtml = `
+    <div id="nikto-info">
+        <h2>Nikto</h2>
+        <p>Think of Nikto as a web detective searching for hidden or problematic files on a website's server. It checks for common security issues.</p>
+        <h3>What it Does:</h3>
+        <ul>
+            <li><strong>Finds Old Software:</strong> Looks for outdated server programs that might have security holes.</li>
+            <li><strong>Checks for Hidden Files:</strong> Searches for files that shouldn't be publicly accessible.</li>
+            <li><strong>Identifies Server Problems:</strong> Finds misconfigurations that could expose sensitive information.</li>
+            <li><strong>Uses Plugins:</strong> Can be extended with extra checks, like adding more tools to a detective's kit.</li>
+        </ul>
+        <h3>Why it's Useful:</h3>
+        <ul>
+            <li><strong>Web Security Checks:</strong> Helps find and fix vulnerabilities on web servers.</li>
+            <li><strong>Prevents Attacks:</strong> Stops attackers from exploiting known weaknesses.</li>
+            <li><strong>Regular Audits:</strong> Ensures websites are secure over time.</li>
+            <li><strong>Configuration Checks:</strong> Verifies that server settings are correct.</li>
+        </ul>
+        <p>Nikto is a valuable tool for anyone managing a website, helping to keep it safe from common web-based attacks.</p>
+    </div>
+`;
+
+        let wpscanInfoHtml = `
+    <div id="wpscan-info">
+        <h2>WPScan</h2>
+        <p>WPScan is like a specialized security scanner for WordPress websites. It's designed to find weaknesses in WordPress installations.</p>
+        <h3>What it Does:</h3>
+        <ul>
+            <li><strong>Checks WordPress Core:</strong> Looks for vulnerabilities in the main WordPress software.</li>
+            <li><strong>Scans Plugins & Themes:</strong> Finds security issues in installed add-ons.</li>
+            <li><strong>Lists Usernames:</strong> Attempts to find valid usernames, which attackers might use.</li>
+            <li><strong>Tests Password Strength:</strong> Checks if passwords are easy to guess.</li>
+        </ul>
+        <h3>Why it's Useful:</h3>
+        <ul>
+            <li><strong>WordPress Security:</strong> Helps secure WordPress sites from known vulnerabilities.</li>
+            <li><strong>Identifies Weak Points:</strong> Finds specific areas that need improvement.</li>
+            <li><strong>Regular Checks:</strong> Keeps WordPress sites up-to-date with security fixes.</li>
+            <li><strong>Reduces Risk:</strong> Minimizes the chance of a successful attack on a WordPress site.</li>
+        </ul>
+        <p>WPScan is essential for WordPress site owners and security professionals to maintain a secure online presence.</p>
+    </div>
+`;
+
+        let msfInfoHtml = `
+    <div id="msf-info">
+        <h2>Metasploit Framework (MSF)</h2>
+        <p>MSF is a powerful toolkit for security testing, like a Swiss Army knife for ethical hackers. It helps find and test security vulnerabilities.</p>
+        <h3>What it Does:</h3>
+        <ul>
+            <li><strong>Creates Exploits:</strong> Develops code to test and exploit vulnerabilities.</li>
+            <li><strong>Manages Payloads:</strong> Delivers code to target systems after an exploit.</li>
+            <li><strong>Uses Helper Tools:</strong> Provides modules for scanning and gathering information.</li>
+            <li><strong>Performs Post-Exploitation:</strong> Actions taken after gaining access, like gathering more data.</li>
+        </ul>
+        <h3>Why it's Useful:</h3>
+        <ul>
+            <li><strong>Security Testing:</strong> Helps find and verify security weaknesses.</li>
+            <li><strong>Vulnerability Research:</strong> Aids in understanding how exploits work.</li>
+            <li><strong>Penetration Testing:</strong> Simulates real-world attacks to test defenses.</li>
+            <li><strong>Security Audits:</strong> Verifies that security measures are effective.</li>
+        </ul>
+        <p>MSF is a complex but powerful tool, used by security professionals to test and improve network security.</p>
+    </div>
+`;
+        let reports = {
+          nmap_scan: nmapInfoHtml,
+          nikto_scan: niktoInfoHtml,
+          WPscan_scan: wpscanInfoHtml,
+          msf_scan: msfInfoHtml,
+        };
+
+        document.getElementById("modalTitle").innerText = reportType
+          .replace("_", " ")
+          .toUpperCase();
+        document.getElementById("modalContent").innerHTML =
+          reports[reportType] || "<p>No data available</p>";
+
+        let modal = new bootstrap.Modal(document.getElementById("infoModal"));
+        modal.show();
+      }
+    </script>
 
     <script>
       function fetchReport(reportType) {
