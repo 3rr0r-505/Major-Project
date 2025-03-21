@@ -1,116 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ module_name }} Report</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .header {
-            background-color: rgb(84, 151, 218);
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 30px;
-            font-weight: bold;
-            width: 100vw;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            border-radius: 0;
-        }
-        body {
-            padding-top: 80px;
-            overflow-x: auto; /* Ensures horizontal scrollbar is always visible */
-            width: 100vw;
-        }
-        .container {
-            margin-top: 20px;
-        }
-        .log-content {
-            width: 100vw;  /* Takes full screen width */
-            height: calc(100vh - 100px); /* Adjusts height dynamically */
-            overflow-x: auto; /* Ensures horizontal scrolling */
-            overflow-y: auto; /* Enables vertical scrolling */
-            white-space: pre; /* Keeps formatting intact */
-            background-color: #fff;
-            padding: 10px;
-            font-family: monospace;
-            font-size: 1rem;
-            border: none;
-        }
-        .attack-report {
-            font-family: 'Arial', sans-serif;
-            font-size: 1rem;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            word-wrap: break-word;  /* Ensures text wraps within the card */
-            overflow-wrap: break-word;  /* Same as word-wrap for more compatibility */
-        }
-        .attack-report .list-group-item {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 5px;
-            word-wrap: break-word;  /* Prevents text overflow */
-            overflow-wrap: break-word;  /* Ensures long words break to fit the line */
-            white-space: normal;  /* Ensures text wraps instead of overflowing */
-        }
-        
-        .attack-report .list-group-item:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
-</head>
-<body class="container">
-    <div class="header">HoneyPott3r Reports</div>
-    <div class="mt-4">
-        <h3>{{ module_name | capitalize }} Report</h3>
-
-        {% if module_name == "complete" %}
-            {% if log_content %}
-            <pre class="log-content">{{ log_content }}</pre>
-            {% else %}
-                <pre class="border p-3 bg-light text-danger">No log file available.</pre>
-            {% endif %}
-
-        {% elif module_name == "attacks" %}
-            {% if report_content %}
-                <ul class="list-group attack-report">
-                    {% for attack, result in report_content.items() %}
-                        <li class="list-group-item">
-                            <strong>{{ attack.replace("_", " ").title() }}:</strong>
-                            {% if attack == "reverse_exploitation" %}
-                                <pre class="border p-3 bg-light" style="font-family: Arial, sans-serif; font-size: 1rem; white-space: pre-wrap; word-wrap: break-word; max-width: 100%;">{{ result | tojson(indent=2) }}</pre>
-                            {% else %}
-                                <p>{{ result }}</p>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <pre class="border p-3 bg-light text-danger">No attack data available.</pre>
-            {% endif %}
-
-        {% else %}
-            {% if report_content %}
-                <pre class="border p-3 bg-light">{{ report_content }}</pre>
-            {% else %}
-                <pre class="border p-3 bg-light text-danger">No data available.</pre>
-            {% endif %}
-        {% endif %}
-    </div>
-
-    <a href="/dashboard?id={{ test_id }}" class="btn btn-primary mt-3 mb-4">Back to Dashboard</a>
-</body>
-</html>
- -->
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -147,12 +35,24 @@
             height: calc(100vh - 120px);
             overflow: auto;
             white-space: pre-wrap;
-            background: #fff;
+            background: #282c34; /* Dark background for terminal look */
             padding: 15px;
-            font-family: monospace;
+            font-family: 'Courier New', monospace; /* Monospace font for terminal look */
             font-size: 1rem;
             border-radius: 8px;
-            color: #000;
+            color: #98c379; /* Light green text for typical terminal color */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+        }
+        .log-title {
+            background: #3e4451; /* Slightly lighter background for the title */
+            color: #abb2bf; /* Light gray text for title */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: left;
         }
         .attack-report {
             background: white;
@@ -195,10 +95,10 @@
 <body class="container">
     <div class="header">HoneyPott3r Reports</div>
     <div class="mt-4">
-        <h3>{{ module_name | capitalize }} Report</h3>
+        <div class="log-title">{{ module_name | capitalize }} Report</div>
         {% if module_name == "complete" %}
             {% if log_content %}
-            <pre class="log-content">{{ log_content }}</pre>
+                <pre class="log-content">{{ log_content }}</pre>
             {% else %}
                 <pre class="border p-3 bg-light text-danger">No log file available.</pre>
             {% endif %}
